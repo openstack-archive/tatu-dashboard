@@ -27,8 +27,8 @@ extensions = [
 ]
 
 # openstackdocstheme options
-repository_name = 'openstack/designate-dashboard'
-bug_project = 'designate-dashboard'
+repository_name = 'openstack/tatu-dashboard'
+bug_project = 'tatu-dashboard'
 bug_tag = ''
 html_last_updated_fmt = '%Y-%m-%d %H:%M'
 html_theme = 'openstackdocs'
@@ -44,7 +44,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'designate_dashboard'
+project = u'tatu_dashboard'
 copyright = u'2013, OpenStack Foundation'
 
 # If true, '()' will be appended to :func: etc. cross-reference text.

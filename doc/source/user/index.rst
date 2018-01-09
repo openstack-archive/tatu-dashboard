@@ -2,6 +2,6 @@
 Usage
 ========
 
-To use designate_dashboard in a project::
+To use tatu_dashboard in a project::
 
-	import designate_dashboard
+	import tatu_dashboard

@@ -19,19 +19,19 @@
 
   /**
    * @ngdoc overview
-   * @ngname designatedashboard
+   * @ngname tatudashboard
    *
    * @description
    * Provides the services and widgets required
    * to support and display the project search panel.
    */
   angular
-    .module('designatedashboard', [
+    .module('tatudashboard', [
       'ngRoute',
-      'designatedashboard.resources'
+      'tatudashboard.resources'
     ])
     .constant(
-      'designatedashboard.apiPassthroughUrl', '/api/dns/')
+      'tatudashboard.apiPassthroughUrl', '/api/ssh/')
     .config(config)
     .run(run);
 
@@ -42,7 +42,7 @@
   ];
 
   /**
-   * @name designatedashboard.basePath
+   * @name tatudashboard.basePath
    * @description Base path for the project dashboard
    *
    * @param {function} $provide ng provide service
@@ -54,21 +54,18 @@
    * @returns {undefined}
    */
   function config($provide, $routeProvider, $windowProvider) {
-    var path = $windowProvider.$get().STATIC_URL + 'designatedashboard/';
-    $provide.constant('designatedashboard.basePath', path);
+    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/';
+    $provide.constant('tatudashboard.basePath', path);
 
     $routeProvider
-      .when('/project/dnszones/', {
-        templateUrl: path + 'zones.html'
-      })
-      .when('/project/reverse_dns/', {
-        templateUrl: path + 'reverse_dns.html'
+      .when('/project/ssh_hosts/', {
+        templateUrl: path + 'hosts.html'
       });
   }
 
   run.$inject = [
     'horizon.framework.conf.resource-type-registry.service',
-    'designatedashboard.basePath'
+    'tatudashboard.basePath'
   ];
 
   function run(registry, basePath) {

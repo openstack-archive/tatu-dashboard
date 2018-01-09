@@ -12,18 +12,86 @@
 # implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from designateclient import exceptions as designateclient
-
 from openstack_dashboard import exceptions
 
+
+class Base(Exception):
+    def __init__(self, message=None):
+        if not message:
+            message = self.__class__.__name__
+        super(Base, self).__init__(message)
+
+
+class UnsupportedVersion(Base):
+    pass
+
+
+class ResourceNotFound(Base):
+    pass
+
+
+class NoUniqueMatch(Base):
+    pass
+
+
+class RemoteError(Base):
+    def __init__(self, message=None, code=None, type=None, errors=None,
+                 request_id=None, **ignore):
+        err_message = self._get_error_message(message, type, errors)
+        self.message = err_message
+        self.code = code
+        self.type = type
+        self.errors = errors
+        self.request_id = request_id
+
+        super(RemoteError, self).__init__(err_message)
+
+    def _get_error_message(self, _message, _type, _errors):
+        # Try to get a useful error msg if 'message' has nothing
+        if not _message:
+            if _errors and 'errors' in _errors:
+                err_msg = list()
+                for err in _errors['errors']:
+                    if 'message' in err:
+                        err_msg.append(err['message'])
+                _message = '. '.join(err_msg)
+            elif _type:
+                _message = str(_type)
+        return _message
+
+
+class Unknown(RemoteError):
+    pass
+
+
+class BadRequest(RemoteError):
+    pass
+
+
+class Forbidden(RemoteError):
+    pass
+
+
+class Conflict(RemoteError):
+    pass
+
+
+class NotFound(RemoteError):
+    pass
+
+
+class OverQuota(RemoteError):
+    pass
+
+
 NOT_FOUND = exceptions.NOT_FOUND + (
-    designateclient.ResourceNotFound,
-    designateclient.NotFound,
+    ResourceNotFound,
+    NotFound,
     )
 RECOVERABLE = exceptions.RECOVERABLE + (
-    designateclient.BadRequest,
-    designateclient.Conflict,
+    BadRequest,
+    Conflict,
     )
 UNAUTHORIZED = exceptions.UNAUTHORIZED + (
-    designateclient.Forbidden,
+    Forbidden,
     )

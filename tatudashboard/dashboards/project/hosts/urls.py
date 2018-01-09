@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# Copyright 2014 Hewlett-Packard Development Company, L.P.
+#    (c) Copyright 2015 Hewlett-Packard Development Company, L.P.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -12,12 +11,12 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-import os
-import sys
+
+from django.conf.urls import url
+
+from tatudashboard.dashboards.project.hosts import views
 
 
-if __name__ == "__main__":
-    os.environ.setdefault(
-        "DJANGO_SETTINGS_MODULE", "tatudashboard.settings")
-    from django.core.management import execute_from_command_line  # noqa
-    execute_from_command_line(sys.argv)
+urlpatterns = [
+    url('', views.IndexView.as_view(), name='index'),
+]

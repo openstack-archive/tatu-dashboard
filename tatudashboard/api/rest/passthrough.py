@@ -40,7 +40,7 @@ def _passthrough_request(request_method, url,
     if getattr(settings, 'OPENSTACK_SSL_NO_VERIFY', False):
         verify = False
 
-    service_url = _get_service_url(request, 'dns')
+    service_url = _get_service_url(request, 'ssh')
     request_url = '{}{}'.format(
         service_url,
         url if service_url.endswith('/') else ('/' + url)
@@ -93,7 +93,7 @@ class Passthrough(generic.View):
 
        Horizon only adds auth and CORS proxying.
     """
-    url_regex = r'dns/(?P<path>.+)$'
+    url_regex = r'ssh/(?P<path>.+)$'
 
     @rest_utils.ajax()
     def get(self, request, path):

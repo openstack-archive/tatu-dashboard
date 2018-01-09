@@ -1,4 +1,4 @@
-Welcome to Designate dashboard Agent Release Notes documentation!
+Welcome to Tatu dashboard Agent Release Notes documentation!
 =================================================================
 
 Contents
@@ -8,10 +8,8 @@ Contents
    :maxdepth: 2
 
    unreleased
+   queens
    pike
-   ocata
-   newton
-   mitaka
 
 Indices and tables
 ==================

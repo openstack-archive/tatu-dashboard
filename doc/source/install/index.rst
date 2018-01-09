@@ -4,9 +4,9 @@ Installation
 
 At the command line::
 
-    $ pip install designate_dashboard
+    $ pip install tatu_dashboard
 
 Or, if you have virtualenvwrapper installed::
 
-    $ mkvirtualenv designate_dashboard
-    $ pip install designate_dashboard
+    $ mkvirtualenv tatu_dashboard
+    $ pip install tatu_dashboard

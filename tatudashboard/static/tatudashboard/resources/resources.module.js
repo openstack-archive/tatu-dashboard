@@ -18,19 +18,17 @@
 
   /**
    * @ngdoc overview
-   * @name designatedashboard.resources
+   * @name tatudashboard.resources
    * @description
    *
-   * # designatedashboard.resources
+   * # tatudashboard.resources
    *
    * This module hosts registered resource types.  This module file may
    * contain individual registrations, or may have sub-modules that
    * more fully contain registrations.
    */
   angular
-    .module('designatedashboard.resources', [
-      'designatedashboard.resources.os-designate-recordset',
-      'designatedashboard.resources.os-designate-zone',
-      'designatedashboard.resources.os-designate-floatingip'
+    .module('tatudashboard.resources', [
+      'tatudashboard.resources.os-tatu-host'
     ]);
 })();

@@ -8,10 +8,10 @@ Team and repository tags
 .. Change things from this point on
 
 ===============================
-designatedashboard
+tatudashboard
 ===============================
 
-Designate Horizon UI bits
+Tatu Horizon UI bits
 
 * Free software: Apache license
 
@@ -24,7 +24,7 @@ Features
 Howto
 -----
 
-1. Package the designatedashboard by running::
+1. Package the tatudashboard by running::
 
     python setup.py sdist
 
@@ -42,24 +42,24 @@ Howto
 
    this seems to be a result of mismatched pbr versioning.  A hacking workaround for development
    purposes is replacing the pbr call with a hard-coded version (e.g. '1.0.1') in
-   designatedashboard/__init__.py.
+   tatudashboard/__init__.py.
 
-2. Copy panel plugin files into your Horizon config.  These files can be found in designatedashboard/enabled
+2. Copy panel plugin files into your Horizon config.  These files can be found in tatudashboard/enabled
    and should be copied to /usr/share/openstack-dashboard/openstack_dashboard/local/enabled or the
    equivalent directory for your openstack-dashboard install.
 
 3. Make sure your keystone catalog contains endpoints for service type 'dns'.  If no such endpoints are
-   found, the designatedashboard panels will not render.
+   found, the tatudashboard panels will not render.
 
-4. (Optional) Copy the designate policy file into horizon's policy files folder, and add this config::
+4. (Optional) Copy the tatu policy file into horizon's policy files folder, and add this config::
 
-    'dns': 'designate_policy.json',
+    'ssh': 'tatu_policy.json',
 
 5. (Optional) Within your horizon settings file(s) (either the local settings or the other settings.py), add
    the line below.  This will make it so the record create/update screen uses a drop down of your floating ip
    addresses instead of a free form text field::
 
-    DESIGNATE = { 'records_use_fips': True }
+    TATU = { 'records_use_fips': True }
 
 
 Test

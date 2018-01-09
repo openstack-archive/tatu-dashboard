@@ -1,4 +1,4 @@
 - project:
-    name: openstack/designate-dashboard
+    name: openstack/tatu-dashboard
     templates:
-      - designate-devstack-jobs
+      - tatu-devstack-jobs

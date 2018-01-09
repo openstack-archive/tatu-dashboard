@@ -1,8 +1,8 @@
 {
   "version": "0.0.0",
   "private": true,
-  "name": "designate-dashboard",
-  "description": "Designate Dashboard",
+  "name": "tatu-dashboard",
+  "description": "Tatu Dashboard",
   "repository": "none",
   "license": "Apache 2.0",
   "devDependencies": {
@@ -17,8 +17,8 @@
   },
   "scripts": {
     "postinstall": "if [ ! -d .venv ]; then tox -epy27 --notest; fi",
-    "lint": "eslint --no-color designatedashboard/static",
-    "lintq": "eslint --quiet designatedashboard/static",
+    "lint": "eslint --no-color tatudashboard/static",
+    "lintq": "eslint --quiet tatudashboard/static",
     "test": "karma start karma.conf.js --single-run"
   },
   "dependencies": {}

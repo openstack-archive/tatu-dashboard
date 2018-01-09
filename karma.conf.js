@@ -87,7 +87,7 @@ module.exports = function (config) {
        * Those files have extension of `.module.js`. The order among them is
        * not significant.
        */
-      './designatedashboard/static/**/*.module.js',
+      './tatudashboard/static/**/*.module.js',
 
       /**
        * Followed by other JavaScript files that defines angular providers
@@ -95,7 +95,7 @@ module.exports = function (config) {
        * files or spec files defined below. The order among them is not
        * significant.
        */
-      './designatedashboard/static/**/!(*.spec|*.mock).js',
+      './tatudashboard/static/**/!(*.spec|*.mock).js',
 
       /**
        * Then, list files for mocks with `mock.js` extension. The order
@@ -108,12 +108,12 @@ module.exports = function (config) {
        * Finally, list files for spec with `spec.js` extension. The order
        * among them should not be significant.
        */
-      './designatedashboard/static/**/*.spec.js',
+      './tatudashboard/static/**/*.spec.js',
 
       /**
        * Angular external templates
        */
-      './designatedashboard/static/**/*.html',
+      './tatudashboard/static/**/*.html',
 
     ],
 

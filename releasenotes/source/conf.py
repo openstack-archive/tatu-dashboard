@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Designate dashboard Release Notes documentation build configuration file.
+# Tatu dashboard Release Notes documentation build configuration file.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -31,8 +31,8 @@ extensions = [
 ]
 
 # openstackdocstheme options
-repository_name = 'openstack/designate-dashboard'
-bug_project = 'designate-dashboard'
+repository_name = 'openstack/tatu-dashboard'
+bug_project = 'tatu-dashboard'
 bug_tag = ''
 html_last_updated_fmt = '%Y-%m-%d %H:%M'
 html_theme = 'openstackdocs'
@@ -54,8 +54,8 @@ master_doc = 'index'
 
 # General information about the project.
 
-project = u'Designate dashboard Client Release Notes'
-copyright = u'2016, Designate dashboard developers'
+project = u'Tatu dashboard Client Release Notes'
+copyright = u'2016, Tatu dashboard developers'
 
 # Release notes are version independent
 # The short X.Y version.
@@ -189,7 +189,7 @@ html_static_path = ['_static']
 
 # Output file base name for HTML help builder.
 
-htmlhelp_basename = 'DesignatedashboardReleaseNotestdoc'
+htmlhelp_basename = 'TatudashboardReleaseNotestdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -211,9 +211,9 @@ latex_elements = {
 # author, documentclass [howto, manual, or own class]).
 
 latex_documents = [
-    ('index', 'PythonDesignatedashboard.tex',
-     u'Designate dashboard Release Notes Documentation',
-     u'Designate dashboard developers', 'manual'),
+    ('index', 'PythonTatudashboard.tex',
+     u'Tatu dashboard Release Notes Documentation',
+     u'Tatu dashboard developers', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -243,9 +243,9 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 
 man_pages = [
-    ('index', 'designatedashboard',
-     u'Designate dashboard Release Notes Documentation',
-     [u'Designate dashboard developers'], 1)
+    ('index', 'tatudashboard',
+     u'Tatu dashboard Release Notes Documentation',
+     [u'Tatu dashboard developers'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -259,9 +259,9 @@ man_pages = [
 # dir menu entry, description, category)
 
 texinfo_documents = [
-    ('index', 'Designate dashboard',
-     u'Designate dashboard Release Notes Documentation',
-     u'Designate dashboard developers', 'Designate dashboard',
+    ('index', 'Tatu dashboard',
+     u'Tatu dashboard Release Notes Documentation',
+     u'Tatu dashboard developers', 'Tatu dashboard',
      'One line description of project.', 'Miscellaneous'),
 ]
 

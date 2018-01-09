@@ -17,8 +17,8 @@
   'use strict';
 
   angular
-    .module('designatedashboard.resources')
-    .factory('designatedashboard.resources.util', utilService);
+    .module('tatudashboard.resources')
+    .factory('tatudashboard.resources.util', utilService);
 
   utilService.$inject = [
     'horizon.framework.util.q.extensions',

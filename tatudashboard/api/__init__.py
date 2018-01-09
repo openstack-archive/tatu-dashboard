@@ -1,1 +1,1 @@
-from designatedashboard.api import designate  # noqa
+from tatudashboard.api import tatu  # noqa

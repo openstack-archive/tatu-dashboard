@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# Copyright 2014 Hewlett-Packard Development Company, L.P.
+# Copyright 2013 Hewlett-Packard Development Company, L.P.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -12,12 +11,10 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-import os
-import sys
 
-
-if __name__ == "__main__":
-    os.environ.setdefault(
-        "DJANGO_SETTINGS_MODULE", "tatudashboard.settings")
-    from django.core.management import execute_from_command_line  # noqa
-    execute_from_command_line(sys.argv)
+# The name of the panel group to be added to HORIZON_CONFIG. Required.
+PANEL_GROUP = 'ssh'
+# The display name of the PANEL_GROUP. Required.
+PANEL_GROUP_NAME = 'SSH'
+# The name of the dashboard the PANEL_GROUP associated with. Required.
+PANEL_GROUP_DASHBOARD = 'project'

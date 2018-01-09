@@ -16,4 +16,4 @@ import pbr.version
 
 
 __version__ = pbr.version.VersionInfo(
-    'designate-dashboard').version_string()
+    'tatu-dashboard').version_string()
