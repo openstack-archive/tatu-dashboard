@@ -21,7 +21,6 @@
     .factory('tatudashboard.resources.os-tatu-host.api', apiService);
 
   apiService.$inject = [
-    '$q',
     'tatudashboard.apiPassthroughUrl',
     'horizon.framework.util.http.service',
     'horizon.framework.widgets.toast.service'
@@ -35,7 +34,7 @@
    * @description Provides direct access to Tatu Host APIs.
    * @returns {Object} The service
    */
-  function apiService($q, apiPassthroughUrl, httpService, toastService) {
+  function apiService(apiPassthroughUrl, httpService, toastService) {
     var service = {
       get: get,
       list: list,
@@ -51,7 +50,7 @@
     /**
      * @name list
      * @description
-     * Get a list of record sets.
+     * Get a list of hosts.
      *
      * The listing result is an object with property "items." Each item is
      * a host.
@@ -62,10 +61,38 @@
      * @returns {Object} The result of the API call
      */
     function list(params) {
-      return httpService.get(apiPassthroughUrl + 'hosts/', params)
+      var config = params ? {'params': params} : {};
+      var hosts = [{
+        'instance_id': '00000000-aaaa-bbbb-cccc-111122224444',
+        'hostname': 'fluffy',
+        'proj_id': 'aaaaaaaa-aaaa-bbbb-cccc-111122224444',
+        'proj_name': 'ProjectA',
+        'cert': 'Bogus ssh cert...',
+        'pat': '11.11.0.1:1002,11.11.0.2:1002',
+        'srv_url': '_ssh._tcp.fluffy.aaaaaaaa.tatu.com.',
+        },{
+        'instance_id': '11111111-aaaa-bbbb-cccc-111122224444',
+        'hostname': 'chester',
+        'proj_id': 'aaaaaaaa-aaaa-bbbb-cccc-111122224444',
+        'proj_name': 'ProjectA',
+        'cert': 'Bogus ssh cert...',
+        'pat': '11.11.0.1:1005,11.11.0.2:1005',
+        'srv_url': '_ssh._tcp.chester.aaaaaaaa.tatu.com.',
+        },{
+        'instance_id': '22222222-aaaa-bbbb-cccc-111122224444',
+        'hostname': 'snoopy',
+        'proj_id': 'aaaaaaaa-aaaa-bbbb-cccc-111122224444',
+        'proj_name': 'ProjectA',
+        'cert': 'Bogus ssh cert...',
+        'pat': '11.11.0.1:1009,11.11.0.2:1009',
+        'srv_url': '_ssh._tcp.snoopy.aaaaaaaa.tatu.com.',
+        }];
+      return hosts;
+      /*
+      return httpService.get(apiPassthroughUrl + 'hosts/', config)
         .error(function () {
-          toastService.add('error', gettext('Unable to retrieve the hosts.'));
-        });
+          toastService.add('error', gettext('Unable to retrieve the host.'));
+        });*/
     }
 
     /**
@@ -73,61 +100,72 @@
      * @description
      * Get a single host by ID.
      *
-     * @param {string} hostId
+     * @param {string} id
      * Specifies the id of the host to request.
      *
      * @returns {Object} The result of the API call
      */
-    function get(hostId) {
-      // Unfortunately routed-details-view is not happy when load fails, which is
-      // common when then delete action removes a record set. Mask this failure by
-      // always returning a successful promise instead of terminating the $http promise
-      // in the .error handler.
-      return httpService.get(apiPassthroughUrl + 'hosts/' + hostId + '/')
-        .then(undefined, function onError() {
+    function get(id) {
+      return httpService.get(apiPassthroughUrl + 'hosts/' + id + '/')
+        .error(function () {
           toastService.add('error', gettext('Unable to retrieve the host.'));
-          return $q.when({});
         });
     }
 
     /**
-     * @name delete
+     * @name deleteHost
      * @description
      * Delete a single host by ID
-     * @param {string} zoneId
-     * The id of the zone containing the host
-     *
-     * @param {string} hostId
-     * The id of the host within the zone
-     *
+     * @param id
      * @returns {*}
      */
-    function deleteRecordSet(zoneId, recordSetId) {
-      return httpService.delete(apiPassthroughUrl + 'v2/zones/' + zoneId + '/recordsets/' + recordSetId + '/')
+    function deleteHost(id) {
+      return httpService.delete(apiPassthroughUrl + 'hosts/' + id + '/')
         .error(function () {
           toastService.add('error', gettext('Unable to delete the host.'));
         });
     }
 
-    function create(zoneId, data) {
-      return httpService.post(apiPassthroughUrl + 'v2/zones/' + zoneId + '/recordsets/', data)
-        .error(function () {
+    /**
+     * @name create
+     * @description
+     * Create a host
+     *
+     * @param {Object} data
+     * Specifies the host information to create
+     *
+     * @returns {Object} The created host object
+     */
+    function create(data) {
+      return httpService.post(apiPassthroughUrl + 'hosts/', data)
+        .error(function() {
           toastService.add('error', gettext('Unable to create the host.'));
-        });
+        })
     }
 
-    function update(zoneId, recordSetId, data) {
+    /**
+     * @name create
+     * @description
+     * Update a host
+     *
+     * @param {Object} id - host id
+     * @param {Object} data to pass directly to host update API
+     * Specifies the host information to update
+     *
+     * @returns {Object} The updated host object
+     */
+    function update(id, data) {
       // The update API will not accept extra data. Restrict the input to only the allowed
       // fields
       var apiData = {
+        email: data.email,
         ttl: data.ttl,
-        description: data.description,
-        records: data.records
+        description: data.description
       };
-      return httpService.put(apiPassthroughUrl + 'v2/zones/' + zoneId + '/recordsets/' + recordSetId, apiData)
-        .error(function () {
+      return httpService.patch(apiPassthroughUrl + 'hosts/' + id + '/', apiData )
+        .error(function() {
           toastService.add('error', gettext('Unable to update the host.'));
-        });
+        })
     }
   }
 }());

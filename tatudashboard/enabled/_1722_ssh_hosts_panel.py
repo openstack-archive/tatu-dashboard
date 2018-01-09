@@ -15,7 +15,7 @@
 from tatudashboard import exceptions
 
 # The name of the panel to be added to HORIZON_CONFIG. Required.
-PANEL = 'ssh_hosts'
+PANEL = 'hosts'
 # The name of the dashboard the PANEL associated with. Required.
 PANEL_DASHBOARD = 'project'
 # The name of the panel group the PANEL is associated with.
@@ -26,6 +26,8 @@ ADD_EXCEPTIONS = {
     'not_found': exceptions.NOT_FOUND,
     'unauthorized': exceptions.UNAUTHORIZED,
 }
+
+ADD_INSTALLED_APPS = ['tatudashboard']
 
 # Python panel class of the PANEL to be added.
 ADD_PANEL = (

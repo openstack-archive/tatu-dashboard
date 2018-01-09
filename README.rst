@@ -48,7 +48,7 @@ Howto
    and should be copied to /usr/share/openstack-dashboard/openstack_dashboard/local/enabled or the
    equivalent directory for your openstack-dashboard install.
 
-3. Make sure your keystone catalog contains endpoints for service type 'dns'.  If no such endpoints are
+3. Make sure your keystone catalog contains endpoints for service type 'ssh'.  If no such endpoints are
    found, the tatudashboard panels will not render.
 
 4. (Optional) Copy the tatu policy file into horizon's policy files folder, and add this config::

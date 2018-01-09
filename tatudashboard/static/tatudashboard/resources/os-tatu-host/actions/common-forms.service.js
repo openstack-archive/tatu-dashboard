@@ -71,113 +71,48 @@
           "properties": {
             "hostname": {
               "type": "string",
-              "pattern": /^.+\.$/
             },
-            "description": {
-              "type": "string"
-            },
-            "email": {
+            "instance_id": {
               "type": "string",
-              "format": "email",
-              "pattern": /^[^@]+@[^@]+$/
             },
-            "type": {
+            "proj_id": {
               "type": "string",
-              "enum": [
-                "PRIMARY",
-                "SECONDARY"
-              ]
             },
-            "ttl": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 2147483647
+            "proj_name": {
+              "type": "string",
             },
-            "masters": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "address": {
-                    "type": "string"
-                  }
-                }
-              },
-              "minItems": 1,
-              "uniqueItems": true
+            "cert": {
+              "type": "string",
+            },
+            "pat": {
+              "type": "string",
+            },
+            "srv_url": {
+              "type": "string",
             }
           }
         },
         "form": [
           {
-            "key": "name",
+            "key": "hostname",
             "readonly": readonly,
-            "title": gettext("Name"),
-            "description": gettext("Host name ending in '.'"),
-            "validationMessage": gettext("Host must end with '.'"),
-            "placeholder": "example.com.",
+            "title": gettext("Hostname"),
+            "description": gettext("Foobar fudd"),
             "type": "text",
             "required": true
           },
           {
-            "key": "description",
-            "type": "textarea",
-            "title": gettext("Description"),
-            "description": gettext("Details about the host.")
-          },
-          {
-            "key": "email",
-            "title": gettext("Email Address"),
-            "description": gettext("Email address to contact the host owner."),
-            "validationMessage": gettext("Email address must contain a single '@' character"),
+            "key": "proj_name",
+            "readonly": readonly,
+            "title": gettext("Project Name"),
+            "description": gettext("Confounded JS noobie."),
             "type": "text",
-            "condition": "model.type == 'PRIMARY'",
             "required": true
-          },
-          {
-            "key": "ttl",
-            "title": gettext("TTL"),
-            "description": gettext("Time To Live in seconds."),
-            "type": "number",
-            "condition": "model.type == 'PRIMARY'",
-            "required": true
-          },
-          {
-            "key": "type",
-            "readonly": readonly,
-            "title": gettext("Type"),
-            "description": gettext("Select the type of host"),
-            "type": "select",
-            "titleMap": [
-              {
-                "value": "PRIMARY",
-                "name": gettext("Primary")
-              },
-              {
-                "value": "SECONDARY",
-                "name": gettext("Secondary")
-              }
-            ]
-          },
-          {
-            "key": "masters",
-            "readonly": readonly,
-            "title": gettext("Masters"),
-            "type": "array",
-            "description": gettext("DNS master(s) for the Secondary host."),
-            "condition": "model.type == 'SECONDARY'",
-            "add": gettext("Add Master"),
-            "items": [
-              {
-                "key": "masters[].address",
-                "title": gettext("IP Address")
-              }
-            ]
           }
         ],
         "model": {
-          "type": "PRIMARY",
-          "ttl": 3600
+          "proj_name": "Project24",
+          "hostname": "pluto"
         }
       };
     }

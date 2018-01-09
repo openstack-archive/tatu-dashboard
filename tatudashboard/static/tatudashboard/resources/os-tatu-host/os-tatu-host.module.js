@@ -32,24 +32,22 @@
       'tatudashboard.resources.os-tatu-host.details'
     ])
     .constant(
-      'tatudashboard.resources.os-tatu-host.resourceType',
-      'OS::Tatu::Host')
+      'tatudashboard.resources.os-tatu-host.resourceType', 'OS::Tatu::Host')
     .config(config)
     .run(run);
 
   config.$inject = ['$provide', '$windowProvider'];
 
   function config($provide, $windowProvider) {
-    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-recordset/';
-    $provide.constant('tatudashboard.resources.os-tatu-recordset.basePath', path);
+    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-host/';
+    $provide.constant('tatudashboard.resources.os-tatu-host.basePath', path);
   }
 
   run.$inject = [
     'horizon.app.core.detailRoute',
     'horizon.framework.conf.resource-type-registry.service',
-    'tatudashboard.resources.os-tatu-recordset.api',
-    'tatudashboard.resources.os-tatu-recordset.resourceType',
-    'tatudashboard.resources.os-tatu-recordset.typeMap',
+    'tatudashboard.resources.os-tatu-host.api',
+    'tatudashboard.resources.os-tatu-host.resourceType',
     'tatudashboard.resources.util'
   ];
 
@@ -57,26 +55,26 @@
                registry,
                hostApi,
                resourceTypeString,
-               typeMap,
                util) {
     var resourceType = registry.getResourceType(resourceTypeString);
     resourceType
       .setNames(gettext('SSH Host'), gettext('SSH Hosts'))
-      .setListFunction(list)
+      .setListFunction(listHosts)
+      .setProperty('action', {
+        label: gettext('Action'),
+        values: util.actionMap()
+      })
       .setProperty('instance_id', {
         label: gettext('Instance ID')
       })
       .setProperty('hostname', {
         label: gettext('Hostname'),
-        filters: ['noName']
       })
       .setProperty('proj_id', {
         label: gettext('Project ID'),
-        filters: ['noValue']
       })
       .setProperty('proj_name', {
         label: gettext('Project Name'),
-        filters: ['noValue']
       })
       .setProperty('cert', {
         label: gettext('Certificate')
@@ -91,10 +89,10 @@
     resourceType
       .tableColumns
       .append({
-        id: 'host_name',
+        id: 'hostname',
         priority: 1,
         sortDefault: true,
-        template: '<a ng-href="{$ \'' + detailRoute + 'OS::Tatu::Host/\' + item.id $}">{$ item.name $}</a>'
+        template: '<a ng-href="{$ \'' + detailRoute + 'OS::Tatu::Host/\' + item.instance_id $}">{$ item.hostname $}</a>'
       })
       .append({
         id: 'proj_name',
@@ -112,8 +110,15 @@
     resourceType
       .filterFacets
       .append({
-        label: gettext('Name'),
-        name: 'name',
+        label: gettext('Hostname'),
+        name: 'hostname',
+        isServer: false,
+        singleton: true,
+        persistent: false
+      })
+      .append({
+        label: gettext('Project'),
+        name: 'proj_name',
         isServer: false,
         singleton: true,
         persistent: false
