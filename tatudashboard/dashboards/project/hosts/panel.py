@@ -18,8 +18,8 @@ from openstack_dashboard.dashboards.project import dashboard
 
 
 class Hosts(horizon.Panel):
-    name = _("Hosts")
-    slug = 'hosts'
-    permissions = ('openstack.services.ssh',)
+    name = _("SSH Hosts")
+    slug = 'sshhosts'
+    permissions = ('openstack.services.dns',)
 
 dashboard.Project.register(Hosts)

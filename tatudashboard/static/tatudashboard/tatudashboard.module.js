@@ -58,8 +58,8 @@
     $provide.constant('tatudashboard.basePath', path);
 
     $routeProvider
-      .when('/project/hosts/', {
-        templateUrl: path + 'hosts.html'
+      .when('/project/ssh_ca/', {
+        templateUrl: path + 'ca.html'
       });
   }
 

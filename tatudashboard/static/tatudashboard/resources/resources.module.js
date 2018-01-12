@@ -29,6 +29,6 @@
    */
   angular
     .module('tatudashboard.resources', [
-      'tatudashboard.resources.os-tatu-host'
+      'tatudashboard.resources.os-tatu-ca'
     ]);
 })();

@@ -28,32 +28,18 @@
   angular
     .module('tatudashboard.resources.os-tatu-host', [
       'ngRoute',
-      'tatudashboard.resources.os-tatu-host.actions',
-      'tatudashboard.resources.os-tatu-host.details'
     ])
     .constant(
       'tatudashboard.resources.os-tatu-host.resourceType', 'OS::Tatu::Host')
-    .config(config)
     .run(run);
 
-  config.$inject = ['$provide', '$windowProvider'];
-
-  function config($provide, $windowProvider) {
-    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-host/';
-    $provide.constant('tatudashboard.resources.os-tatu-host.basePath', path);
-  }
-
   run.$inject = [
-    'horizon.app.core.detailRoute',
     'horizon.framework.conf.resource-type-registry.service',
-    'tatudashboard.resources.os-tatu-host.api',
     'tatudashboard.resources.os-tatu-host.resourceType',
     'tatudashboard.resources.util'
   ];
 
-  function run(detailRoute,
-               registry,
-               hostApi,
+  function run(registry,
                resourceTypeString,
                util) {
     var resourceType = registry.getResourceType(resourceTypeString);
@@ -92,7 +78,6 @@
         id: 'hostname',
         priority: 1,
         sortDefault: true,
-        template: '<a ng-href="{$ \'' + detailRoute + 'OS::Tatu::Host/\' + item.instance_id $}">{$ item.hostname $}</a>'
       })
       .append({
         id: 'proj_name',
@@ -115,24 +100,10 @@
         isServer: false,
         singleton: true,
         persistent: false
-      })
-      .append({
-        label: gettext('Project'),
-        name: 'proj_name',
-        isServer: false,
-        singleton: true,
-        persistent: false
       });
 
     function listHosts() {
-      return hostApi.list().then(function onList(response) {
-        // listFunctions are expected to return data in "items"
-        response.data.items = response.data.hosts;
-
-        util.addTimestampIds(response.data.items, 'updated_at');
-
-        return response;
-      });
+      return [];
     }
   }
 

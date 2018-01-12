@@ -15,11 +15,11 @@
 from tatudashboard import exceptions
 
 # The name of the panel to be added to HORIZON_CONFIG. Required.
-PANEL = 'hosts'
+PANEL = 'sshhosts'
 # The name of the dashboard the PANEL associated with. Required.
 PANEL_DASHBOARD = 'project'
 # The name of the panel group the PANEL is associated with.
-PANEL_GROUP = 'ssh'
+PANEL_GROUP = 'dns'
 
 ADD_EXCEPTIONS = {
     'recoverable': exceptions.RECOVERABLE,
