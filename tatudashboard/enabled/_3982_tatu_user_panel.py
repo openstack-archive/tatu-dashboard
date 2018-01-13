@@ -12,16 +12,14 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-PANEL = 'ssh_ca'
+PANEL = 'user'
 PANEL_GROUP = 'default'
-PANEL_DASHBOARD = 'project'
+PANEL_DASHBOARD = 'tatu'
 
 # If set to True, this dashboard will not be added to the settings.
 DISABLED = False
 
-ADD_INSTALLED_APPS = ['tatudashboard']
-
-ADD_PANEL = 'tatudashboard.panels.ca.panel.CA'
+ADD_PANEL = 'tatudashboard.panels.user.panel.User'
 
 ADD_ANGULAR_MODULES = ['tatudashboard']
 

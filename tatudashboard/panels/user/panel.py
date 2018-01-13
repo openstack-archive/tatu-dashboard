@@ -18,8 +18,8 @@ import horizon
 from tatudashboard import dashboard
 
 
-class CA(horizon.Panel):
-    name = _("Certificate Authorities")
-    slug = 'ca'
+class User(horizon.Panel):
+    name = _("Users")
+    slug = 'user'
 
-dashboard.Tatu.register(CA)
+dashboard.Tatu.register(User)

@@ -15,10 +15,10 @@
 import horizon
 
 
-class SSH(horizon.Dashboard):
-    name = "SSH Management"
+class Tatu(horizon.Dashboard):
+    name = "Tatu (SSH)"
     slug = "tatu"
-    default_panel = "ssh_ca"
+    default_panel = "ca"
 
 
-horizon.register(SSH)
+horizon.register(Tatu)

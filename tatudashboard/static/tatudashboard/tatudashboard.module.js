@@ -58,7 +58,13 @@
     $provide.constant('tatudashboard.basePath', path);
 
     $routeProvider
-      .when('/project/ssh_ca/', {
+      .when('/tatu/ca/', {
+        templateUrl: path + 'ca.html'
+      })
+      .when('/tatu/user/', {
+        templateUrl: path + 'ca.html'
+      })
+      .when('/tatu/host/', {
         templateUrl: path + 'ca.html'
       });
   }

@@ -1,4 +1,4 @@
-#    Copyright (c) 2016 Huawei, Inc.
+#    Copyright (c) 2017 Huawei, Inc.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -12,14 +12,15 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.utils.translation import ugettext_lazy as _
+PANEL = 'ca'
+PANEL_GROUP = 'default'
+PANEL_DASHBOARD = 'tatu'
 
-import horizon
-from tatudashboard import dashboard
+# If set to True, this dashboard will not be added to the settings.
+DISABLED = False
 
+ADD_PANEL = 'tatudashboard.panels.ca.panel.CA'
 
-class CA(horizon.Panel):
-    name = _("Certificate Authorities")
-    slug = 'ca'
+ADD_ANGULAR_MODULES = ['tatudashboard']
 
-dashboard.Tatu.register(CA)
+AUTO_DISCOVER_STATIC_FILES = True

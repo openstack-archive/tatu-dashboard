@@ -12,14 +12,11 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.utils.translation import ugettext_lazy as _
+from django.conf.urls import url
 
-import horizon
-from tatudashboard import dashboard
+from . import views
 
 
-class CA(horizon.Panel):
-    name = _("Certificate Authorities")
-    slug = 'ca'
-
-dashboard.Tatu.register(CA)
+urlpatterns = [
+    url('', views.IndexView.as_view(), name='index'),
+]
