@@ -19,7 +19,7 @@ PANEL_DASHBOARD = 'tatu'
 # If set to True, this dashboard will not be added to the settings.
 DISABLED = False
 
-ADD_PANEL = 'tatudashboard.panels.ca.panel.CA'
+ADD_PANEL = 'tatudashboard.dashboards.tatu.ca.panel.CA'
 
 ADD_ANGULAR_MODULES = ['tatudashboard']
 

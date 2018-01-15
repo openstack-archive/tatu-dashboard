@@ -1,4 +1,4 @@
-#    Copyright (c) 2017 Huawei, Inc.
+#    Copyright (c) 2016 Huawei, Inc.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -12,15 +12,10 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-PANEL = 'host'
-PANEL_GROUP = 'default'
-PANEL_DASHBOARD = 'tatu'
+from django.conf.urls import url
 
-# If set to True, this dashboard will not be added to the settings.
-DISABLED = False
+from . import views
 
-ADD_PANEL = 'tatudashboard.dashboards.tatu.host.panel.Host'
-
-ADD_ANGULAR_MODULES = ['tatudashboard']
-
-AUTO_DISCOVER_STATIC_FILES = True
+urlpatterns = [
+    url('', views.IndexView.as_view(), name='index'),
+]

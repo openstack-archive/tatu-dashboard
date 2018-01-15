@@ -12,11 +12,14 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.conf.urls import url
+import horizon
+from django.utils.translation import ugettext_lazy as _
 
-from . import views
+from tatudashboard.dashboards.tatu import dashboard
 
 
-urlpatterns = [
-    url('', views.IndexView.as_view(), name='index'),
-]
+class Host(horizon.Panel):
+    name = _("Hosts")
+    slug = 'host'
+
+dashboard.Tatu.register(Host)

@@ -1,4 +1,4 @@
-#    Copyright (c) 2016 Huawei, Inc.
+#    Copyright (c) 2017 Huawei, Inc.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -11,15 +11,6 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-
-from django.utils.translation import ugettext_lazy as _
-
-import horizon
-from tatudashboard import dashboard
-
-
-class CA(horizon.Panel):
-    name = _("Certificate Authorities")
-    slug = 'ca'
-
-dashboard.Tatu.register(CA)
+"""REST API for Horizon dashboard Javascript code.
+"""
+from . import passthrough  # noqa

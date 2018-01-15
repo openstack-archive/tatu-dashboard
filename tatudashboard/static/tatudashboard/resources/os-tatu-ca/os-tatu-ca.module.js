@@ -30,16 +30,20 @@
       'ngRoute',
     ])
     .constant(
-      'tatudashboard.resources.os-tatu-host.resourceType', 'OS::Tatu::CA')
+      'tatudashboard.resources.os-tatu-ca.resourceType', 'OS::Tatu::CA')
     .run(run);
 
   run.$inject = [
     'horizon.framework.conf.resource-type-registry.service',
-    'tatudashboard.resources.os-tatu-host.resourceType'
+    'tatudashboard.resources.os-tatu-ca.api',
+    'tatudashboard.resources.os-tatu-ca.resourceType',
+    'tatudashboard.resources.util'
   ];
 
   function run(registry,
-               resourceTypeString) {
+               caApi
+               resourceTypeString,
+               util) {
     var resourceType = registry.getResourceType(resourceTypeString);
     resourceType
       .setNames(gettext('SSH CA'), gettext('SSH CAs'))
@@ -70,8 +74,15 @@
       });
 
 
-    function listHosts() {
-      return [];
+    function listCAs() {
+      return caApi.list().then(function onList(response) {
+        // listFunctions are expected to return data in "items"
+        response.data.items = response.data.CAs;
+
+        util.addTimestampIds(response.data.items, 'updated_at');
+
+        return response;
+      });
     }
   }
 

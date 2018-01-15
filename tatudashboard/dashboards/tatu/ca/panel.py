@@ -12,14 +12,14 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+import horizon
 from django.utils.translation import ugettext_lazy as _
 
-import horizon
-from tatudashboard import dashboard
+from tatudashboard.dashboards.tatu import dashboard
 
 
-class User(horizon.Panel):
-    name = _("Users")
-    slug = 'user'
+class CA(horizon.Panel):
+    name = _("Certificate Authorities")
+    slug = 'ca'
 
-dashboard.Tatu.register(User)
+dashboard.Tatu.register(CA)
