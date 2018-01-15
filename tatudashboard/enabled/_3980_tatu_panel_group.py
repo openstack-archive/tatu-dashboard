@@ -1,4 +1,4 @@
-#    Copyright (c) 2017 Huawei, Inc.
+#    Copyright (c) 2016 Huawei, Inc.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -12,14 +12,9 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-
-# The name of the dashboard to be added to HORIZON['dashboards']. Required.
-DASHBOARD = 'tatu'
-
-# If set to True, this dashboard will not be added to the settings.
-DISABLED = False
-
-ADD_INSTALLED_APPS = ['tatudashboard']
-
-# Automatically discover static resources in installed apps
-AUTO_DISCOVER_STATIC_FILES = True
+# The name of the panel group to be added to HORIZON_CONFIG. Required.
+PANEL_GROUP = 'tatu'
+# The display name of the PANEL_GROUP. Required.
+PANEL_GROUP_NAME = 'Tatu'
+# The name of the dashboard the PANEL_GROUP associated with. Required.
+PANEL_GROUP_DASHBOARD = 'project'

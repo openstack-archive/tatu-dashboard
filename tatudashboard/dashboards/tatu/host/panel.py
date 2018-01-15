@@ -15,11 +15,11 @@
 import horizon
 from django.utils.translation import ugettext_lazy as _
 
-from tatudashboard.dashboards.tatu import dashboard
+from openstack_dashboard.dashboards.project import dashboard
 
 
 class Host(horizon.Panel):
     name = _("Hosts")
-    slug = 'host'
+    slug = 'tatu_host'
 
-dashboard.Tatu.register(Host)
+dashboard.Project.register(Host)

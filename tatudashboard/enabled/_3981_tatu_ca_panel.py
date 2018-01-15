@@ -12,9 +12,9 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-PANEL = 'ca'
-PANEL_GROUP = 'default'
-PANEL_DASHBOARD = 'tatu'
+PANEL = 'tatu_ca'
+PANEL_GROUP = 'tatu'
+PANEL_DASHBOARD = 'project'
 
 # If set to True, this dashboard will not be added to the settings.
 DISABLED = False

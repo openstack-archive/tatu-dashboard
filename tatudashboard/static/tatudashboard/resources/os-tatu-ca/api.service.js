@@ -37,7 +37,7 @@
   function apiService(apiPassthroughUrl, httpService, toastService) {
     var service = {
       get: get,
-      list: list,
+      list: list
     };
 
     return service;

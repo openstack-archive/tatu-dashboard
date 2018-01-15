@@ -15,11 +15,11 @@
 import horizon
 from django.utils.translation import ugettext_lazy as _
 
-from tatudashboard.dashboards.tatu import dashboard
+from openstack_dashboard.dashboards.project import dashboard
 
 
 class CA(horizon.Panel):
     name = _("Certificate Authorities")
-    slug = 'ca'
+    slug = 'tatu_ca'
 
-dashboard.Tatu.register(CA)
+dashboard.Project.register(CA)

@@ -27,11 +27,19 @@
    */
   angular
     .module('tatudashboard.resources.os-tatu-ca', [
-      'ngRoute',
+      'ngRoute'
     ])
     .constant(
       'tatudashboard.resources.os-tatu-ca.resourceType', 'OS::Tatu::CA')
+    .config(config)
     .run(run);
+
+  config.$inject = ['$provide', '$windowProvider'];
+
+  function config($provide, $windowProvider) {
+    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-ca/';
+    $provide.constant('tatudashboard.resources.os-tatu-ca.basePath', path);
+  }
 
   run.$inject = [
     'horizon.framework.conf.resource-type-registry.service',
@@ -41,7 +49,7 @@
   ];
 
   function run(registry,
-               caApi
+               caApi,
                resourceTypeString,
                util) {
     var resourceType = registry.getResourceType(resourceTypeString);
@@ -52,10 +60,10 @@
         label: gettext('CA ID')
       })
       .setProperty('host_pub_key', {
-        label: gettext('Host Public Key'),
+        label: gettext('Host Public Key')
       })
       .setProperty('user_pub_key', {
-        label: gettext('User Public Key'),
+        label: gettext('User Public Key')
       });
 
     resourceType
@@ -66,11 +74,11 @@
       })
       .append({
         id: 'host_pub_key',
-        priority: 2,
+        priority: 2
       })
       .append({
         id: 'user_pub_key',
-        priority: 2,
+        priority: 2
       });
 
 
