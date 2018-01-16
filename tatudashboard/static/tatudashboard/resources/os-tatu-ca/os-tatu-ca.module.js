@@ -56,28 +56,28 @@
     resourceType
       .setNames(gettext('SSH CA'), gettext('SSH CAs'))
       .setListFunction(listCAs)
-      .setProperty('id', {
-        label: gettext('CA ID')
+      .setProperty('auth_id', {
+        label: gettext('Project/CA ID')
       })
-      .setProperty('host_pub_key', {
+      .setProperty('host_key.pub', {
         label: gettext('Host Public Key')
       })
-      .setProperty('user_pub_key', {
+      .setProperty('user_key.pub', {
         label: gettext('User Public Key')
       });
 
     resourceType
       .tableColumns
       .append({
-        id: 'id',
+        id: 'auth_id',
         priority: 1
       })
       .append({
-        id: 'host_pub_key',
+        id: 'host_key.pub',
         priority: 2
       })
       .append({
-        id: 'user_pub_key',
+        id: 'user_key.pub',
         priority: 2
       });
 
@@ -85,9 +85,9 @@
     function listCAs() {
       return caApi.list().then(function onList(response) {
         // listFunctions are expected to return data in "items"
-        response.data.items = response.data.CAs;
+        //response.data.items = response.data.CAs;
 
-        util.addTimestampIds(response.data.items, 'updated_at');
+        util.addTimestampIds(response.data.items, 'auth_id');
 
         return response;
       });

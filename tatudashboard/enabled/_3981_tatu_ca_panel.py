@@ -19,6 +19,8 @@ PANEL_DASHBOARD = 'project'
 # If set to True, this dashboard will not be added to the settings.
 DISABLED = False
 
+ADD_INSTALLED_APPS = ['tatudashboard']
+
 ADD_PANEL = 'tatudashboard.dashboards.tatu.ca.panel.CA'
 
 ADD_ANGULAR_MODULES = ['tatudashboard']
