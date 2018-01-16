@@ -62,10 +62,10 @@
         templateUrl: path + 'ca.html'
       })
       .when('/project/tatu_user/', {
-        templateUrl: path + 'ca.html'
+        templateUrl: path + 'user.html'
       })
       .when('/project/tatu_host/', {
-        templateUrl: path + 'ca.html'
+        templateUrl: path + 'host.html'
       });
   }
 

@@ -26,68 +26,96 @@
    * to support and display SSH (Tatu) host related content.
    */
   angular
-    .module('tatudashboard.resources.os-tatu-ca', [
+    .module('tatudashboard.resources.os-tatu-host', [
       'ngRoute'
     ])
     .constant(
-      'tatudashboard.resources.os-tatu-ca.resourceType', 'OS::Tatu::CA')
+      'tatudashboard.resources.os-tatu-host.resourceType', 'OS::Tatu::Host')
     .config(config)
     .run(run);
 
   config.$inject = ['$provide', '$windowProvider'];
 
   function config($provide, $windowProvider) {
-    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-ca/';
-    $provide.constant('tatudashboard.resources.os-tatu-ca.basePath', path);
+    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-host/';
+    $provide.constant('tatudashboard.resources.os-tatu-host.basePath', path);
   }
 
   run.$inject = [
     'horizon.framework.conf.resource-type-registry.service',
-    'tatudashboard.resources.os-tatu-ca.api',
-    'tatudashboard.resources.os-tatu-ca.resourceType',
+    'tatudashboard.resources.os-tatu-host.api',
+    'tatudashboard.resources.os-tatu-host.resourceType',
     'tatudashboard.resources.util'
   ];
 
   function run(registry,
-               caApi,
+               hostApi,
                resourceTypeString,
                util) {
     var resourceType = registry.getResourceType(resourceTypeString);
     resourceType
-      .setNames(gettext('SSH CA'), gettext('SSH CAs'))
-      .setListFunction(listCAs)
+      .setNames(gettext('SSH Host'), gettext('SSH Hosts'))
+      .setListFunction(listHosts)
+      .setProperty('host_id', {
+        label: gettext('Host ID')
+      })
+      .setProperty('hostname', {
+        label: gettext('Hostname')
+      })
+      .setProperty('fingerprint', {
+        label: gettext('Fingerprint')
+      })
       .setProperty('auth_id', {
         label: gettext('Project/CA ID')
       })
-      .setProperty('host_key.pub', {
-        label: gettext('Host Public Key')
+      .setProperty('key-cert.pub', {
+        label: gettext('Host Certificate')
       })
-      .setProperty('user_key.pub', {
-        label: gettext('User Public Key')
+      .setProperty('pat_bastions', {
+        label: gettext('PAT Bastions')
+      })
+      .setProperty('srv_url', {
+        label: gettext('SRV Recordset URL')
       });
 
     resourceType
       .tableColumns
       .append({
-        id: 'auth_id',
+        id: 'host_id',
         priority: 1
       })
       .append({
-        id: 'host_key.pub',
+        id: 'hostname',
         priority: 2
       })
       .append({
-        id: 'user_key.pub',
+        id: 'fingerprint',
         priority: 2
-      });
+      })
+      .append({
+        id: 'auth_id',
+        priority: 2
+      })
+      .append({
+        id: 'key-cert.pub',
+        priority: 2
+      })
+      .append({
+        id: 'pat_bastions',
+        priority: 2
+      })
+      .append({
+        id: 'srv_url',
+        priority: 2
+      })
 
 
-    function listCAs() {
-      return caApi.list().then(function onList(response) {
+    function listHosts() {
+      return hostApi.list().then(function onList(response) {
         // listFunctions are expected to return data in "items"
-        response.data.items = response.data.CAs;
+        response.data.items = response.data.hosts;
 
-        util.addTimestampIds(response.data.items, 'auth_id');
+        util.addTimestampIds(response.data.items, 'host_id');
 
         return response;
       });

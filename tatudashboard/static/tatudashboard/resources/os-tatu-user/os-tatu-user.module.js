@@ -26,68 +26,75 @@
    * to support and display SSH (Tatu) host related content.
    */
   angular
-    .module('tatudashboard.resources.os-tatu-ca', [
+    .module('tatudashboard.resources.os-tatu-user', [
       'ngRoute'
     ])
     .constant(
-      'tatudashboard.resources.os-tatu-ca.resourceType', 'OS::Tatu::CA')
+      'tatudashboard.resources.os-tatu-user.resourceType', 'OS::Tatu::User')
     .config(config)
     .run(run);
 
   config.$inject = ['$provide', '$windowProvider'];
 
   function config($provide, $windowProvider) {
-    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-ca/';
-    $provide.constant('tatudashboard.resources.os-tatu-ca.basePath', path);
+    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-user/';
+    $provide.constant('tatudashboard.resources.os-tatu-user.basePath', path);
   }
 
   run.$inject = [
     'horizon.framework.conf.resource-type-registry.service',
-    'tatudashboard.resources.os-tatu-ca.api',
-    'tatudashboard.resources.os-tatu-ca.resourceType',
+    'tatudashboard.resources.os-tatu-user.api',
+    'tatudashboard.resources.os-tatu-user.resourceType',
     'tatudashboard.resources.util'
   ];
 
   function run(registry,
-               caApi,
+               userApi,
                resourceTypeString,
                util) {
     var resourceType = registry.getResourceType(resourceTypeString);
     resourceType
-      .setNames(gettext('SSH CA'), gettext('SSH CAs'))
-      .setListFunction(listCAs)
+      .setNames(gettext('SSH User'), gettext('SSH Users'))
+      .setListFunction(listUsers)
+      .setProperty('user_id', {
+        label: gettext('User ID')
+      })
+      .setProperty('fingerprint', {
+        label: gettext('Fingerprint')
+      })
       .setProperty('auth_id', {
         label: gettext('Project/CA ID')
       })
-      .setProperty('host_key.pub', {
-        label: gettext('Host Public Key')
-      })
-      .setProperty('user_key.pub', {
-        label: gettext('User Public Key')
+      .setProperty('key-cert.pub', {
+        label: gettext('User Certificate')
       });
 
     resourceType
       .tableColumns
       .append({
-        id: 'auth_id',
+        id: 'user_id',
         priority: 1
       })
       .append({
-        id: 'host_key.pub',
+        id: 'fingerprint',
         priority: 2
       })
       .append({
-        id: 'user_key.pub',
+        id: 'auth_id',
+        priority: 2
+      })
+      .append({
+        id: 'key-cert.pub',
         priority: 2
       });
 
 
-    function listCAs() {
-      return caApi.list().then(function onList(response) {
+    function listUsers() {
+      return userApi.list().then(function onList(response) {
         // listFunctions are expected to return data in "items"
-        response.data.items = response.data.CAs;
+        response.data.items = response.data.users;
 
-        util.addTimestampIds(response.data.items, 'auth_id');
+        util.addTimestampIds(response.data.items, 'user_id');
 
         return response;
       });
