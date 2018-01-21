@@ -65,6 +65,12 @@
       .setProperty('auth_id', {
         label: gettext('Project/CA ID')
       })
+      .setProperty('revoked', {
+        label: gettext('Was Revoked')
+      })
+      .setProperty('serial', {
+        label: gettext('Serial Number')
+      })
       .setProperty('key-cert.pub', {
         label: gettext('User Certificate')
       });
@@ -81,6 +87,14 @@
       })
       .append({
         id: 'auth_id',
+        priority: 2
+      })
+      .append({
+        id: 'revoked',
+        priority: 2
+      })
+      .append({
+        id: 'serial',
         priority: 2
       })
       .append({
