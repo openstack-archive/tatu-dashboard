@@ -45,13 +45,15 @@
     'horizon.framework.conf.resource-type-registry.service',
     'tatudashboard.resources.os-tatu-host.api',
     'tatudashboard.resources.os-tatu-host.resourceType',
-    'tatudashboard.resources.util'
+    'tatudashboard.resources.util',
+    '$filter'
   ];
 
   function run(registry,
                hostApi,
                resourceTypeString,
-               util) {
+               util,
+               $filter) {
     var resourceType = registry.getResourceType(resourceTypeString);
     resourceType
       .setNames(gettext('SSH Host'), gettext('SSH Hosts'))
@@ -97,16 +99,18 @@
         priority: 2
       })
       .append({
-        id: 'key-cert.pub',
+        id: 'srv_url',
         priority: 2
       })
       .append({
         id: 'pat_bastions',
-        priority: 2
+        priority: 2,
+        filters: ['noName']
       })
       .append({
-        id: 'srv_url',
-        priority: 2
+        id: 'key-cert.pub',
+        priority: 2,
+        filters: [function(input){ return $filter('limitTo')(input, 50, 0); }]
       })
 
 

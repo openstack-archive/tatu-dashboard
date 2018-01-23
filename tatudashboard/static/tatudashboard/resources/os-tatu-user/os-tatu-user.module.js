@@ -45,17 +45,24 @@
     'horizon.framework.conf.resource-type-registry.service',
     'tatudashboard.resources.os-tatu-user.api',
     'tatudashboard.resources.os-tatu-user.resourceType',
-    'tatudashboard.resources.util'
+    'tatudashboard.resources.util',
+    '$filter'
   ];
 
   function run(registry,
                userApi,
                resourceTypeString,
-               util) {
+               util,
+               $filter) {
     var resourceType = registry.getResourceType(resourceTypeString);
     resourceType
       .setNames(gettext('SSH User'), gettext('SSH Users'))
       .setListFunction(listUsers)
+      .setProperty('action', {
+        label: gettext('Action'),
+        filters: ['lowercase', 'noName'],
+        values: util.actionMap()
+      })
       .setProperty('user_id', {
         label: gettext('User ID')
       })
@@ -99,7 +106,8 @@
       })
       .append({
         id: 'key-cert.pub',
-        priority: 2
+        priority: 2,
+        filters: [function(input){ return $filter('limitTo')(input, 50, 0); }]
       });
 
 
