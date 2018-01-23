@@ -80,6 +80,7 @@
         .error(function() {
           toastService.add('error', gettext('Unable to revoke the certificate.'));
         })
+    }
 
     /**
      * @name list

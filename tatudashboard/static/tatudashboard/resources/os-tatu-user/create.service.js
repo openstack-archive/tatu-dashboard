@@ -24,7 +24,6 @@
 
   action.$inject = [
     '$q',
-    'tatudashboard.resources.os-tatu-user.actions.common-forms',
     'tatudashboard.resources.os-tatu-user.api',
     'tatudashboard.resources.os-tatu-user.resourceType',
     'horizon.app.core.openstack-service-api.policy',
@@ -42,7 +41,6 @@
    * Brings up the Create User modal.
    */
   function action($q,
-                  forms,
                   api,
                   resourceTypeName,
                   policy,
@@ -79,7 +77,7 @@
     }
 
     function perform() {
-      var formConfig = forms.getCreateFormConfig();
+      var formConfig = getCreateFormConfig();
       formConfig.title = title;
       return schemaFormModalService.open(formConfig).then(onSubmit, onCancel);
     }
@@ -134,7 +132,8 @@
             "description": gettext("The user's SSH public key."),
             "required": true
           }
-        ]
+        ],
+        "model": { }
       };
     }
   }
