@@ -36,6 +36,8 @@
    */
   function apiService(apiPassthroughUrl, httpService, toastService) {
     var service = {
+      create: create,
+      revoke: revoke,
       get: get,
       list: list
     };
@@ -44,6 +46,41 @@
 
     ///////////////
     
+    /**
+     * @name create
+     * @description
+     * Create a User Certificate
+     *
+     * @param {Object} data
+     * Specifies the User Certificate information to create
+     *
+     * @returns {Object} The created user object
+     */
+    function create(data) {
+      return httpService.post(apiPassthroughUrl + 'usergen/noauth/usercerts/', data)
+        .error(function() {
+          toastService.add('error', gettext('Unable to create the certificate.'));
+        })
+    }
+
+    /**
+     * @name revoke
+     * @description
+     * Revoke a single certificate
+     *
+     * @param {Object} user
+     * Specifies the user certificate to revoke
+     *
+     * @returns {Object} The revoked user certificate
+     */
+    function revoke(user) {
+      var data = { 'serial': user.serial }
+      var url = apiPassthroughUrl + 'noauth/revokeduserkeys/' + user.auth_id + '/'
+      return httpService.post(url, data)
+        .error(function() {
+          toastService.add('error', gettext('Unable to revoke the certificate.'));
+        })
+
     /**
      * @name list
      * @description

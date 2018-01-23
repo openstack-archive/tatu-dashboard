@@ -88,6 +88,22 @@ def _get_service_url(request, service):
 
 
 @urls.register
+class UserCert(generic.View):
+    """Pass-through API for executing service requests.
+
+       Horizon only adds auth and CORS proxying.
+    """
+    url_regex = r'ssh/usergen/(?P<path>.+)$'
+
+    @rest_utils.ajax()
+    def post(self, request, path):
+        data = dict(request.DATA) if request.DATA else {}
+        data['user_id'] = request.user.id
+        data['auth_id'] = request.user.project_id
+        return passthrough_post(path, request, data).json()
+
+
+@urls.register
 class Passthrough(generic.View):
     """Pass-through API for executing service requests.
 
