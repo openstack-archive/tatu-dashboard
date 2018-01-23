@@ -59,10 +59,10 @@
       .setProperty('auth_id', {
         label: gettext('Project/CA ID')
       })
-      .setProperty('host_key.pub', {
+      .setProperty('ca_host_pub', {
         label: gettext('Host Public Key')
       })
-      .setProperty('user_key.pub', {
+      .setProperty('ca_user_pub', {
         label: gettext('User Public Key')
       });
 
@@ -73,11 +73,11 @@
         priority: 1
       })
       .append({
-        id: 'host_key.pub',
+        id: 'ca_host_pub',
         priority: 2
       })
       .append({
-        id: 'user_key.pub',
+        id: 'ca_user_pub',
         priority: 2
       });
 

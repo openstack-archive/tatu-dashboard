@@ -70,7 +70,7 @@
       .setProperty('auth_id', {
         label: gettext('Project/CA ID')
       })
-      .setProperty('key-cert.pub', {
+      .setProperty('cert', {
         label: gettext('Host Certificate')
       })
       .setProperty('pat_bastions', {
@@ -108,7 +108,7 @@
         filters: ['noName']
       })
       .append({
-        id: 'key-cert.pub',
+        id: 'cert',
         priority: 2,
         filters: [function(input){ return $filter('limitTo')(input, 50, 0); }]
       })

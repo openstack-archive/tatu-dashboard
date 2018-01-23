@@ -79,7 +79,7 @@
       .setProperty('serial', {
         label: gettext('Serial Number')
       })
-      .setProperty('key-cert.pub', {
+      .setProperty('cert', {
         label: gettext('User Certificate')
       });
 
@@ -106,7 +106,7 @@
         priority: 2
       })
       .append({
-        id: 'key-cert.pub',
+        id: 'cert',
         priority: 2,
         filters: [function(input){ return $filter('limitTo')(input, 50, 0); }]
       });
