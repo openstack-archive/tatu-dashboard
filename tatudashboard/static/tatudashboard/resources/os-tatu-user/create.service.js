@@ -119,14 +119,14 @@
         "schema": {
           "type": "object",
           "properties": {
-            "'pub_key'": {
+            "pub_key": {
               "type": "string"
             }
           }
         },
         "form": [
           {
-            "key": "'pub_key'",
+            "key": "pub_key",
             "type": "textarea",
             "title": gettext("SSH Public Key"),
             "description": gettext("The user's SSH public key."),

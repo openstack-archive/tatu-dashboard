@@ -60,7 +60,7 @@
     var notAllowedMessage = gettext("You are not allowed to revoke user certificates: %s");
 
     var service = {
-      initScope: initScope,
+      initAction: initAction,
       allowed: allowed,
       perform: perform
     };
@@ -69,19 +69,19 @@
 
     //////////////
 
-    function initScope(newScope) {
-      scope = newScope;
+    function initAction() {
       context = { };
       revokeUserPromise = policy.ifAllowed({rules: [['ssh', 'revoke_user_cert']]});
     }
 
-    function perform(items) {
-      var certs = angular.isArray(items) ? items : [items];
-      context.labels = labelize(certs.length);
+    function perform(items, thescope) {
+      scope = thescope
+      var users = angular.isArray(items) ? items : [items];
+      context.labels = labelize(users.length);
       return $qExtensions.allSettled(users.map(checkPermission)).then(afterCheck);
     }
 
-    function allowed(user) {
+    function allowed(user, thescope) {
       // only row actions pass in user
       // otherwise, assume it is a batch action
       if (user) {
