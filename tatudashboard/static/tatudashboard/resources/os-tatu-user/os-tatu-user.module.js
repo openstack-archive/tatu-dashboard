@@ -28,7 +28,8 @@
   angular
     .module('tatudashboard.resources.os-tatu-user', [
       'ngRoute',
-      'tatudashboard.resources.os-tatu-user.actions'
+      'tatudashboard.resources.os-tatu-user.actions',
+      'tatudashboard.resources.os-tatu-user.details'
     ])
     .constant(
       'tatudashboard.resources.os-tatu-user.resourceType', 'OS::Tatu::User')
