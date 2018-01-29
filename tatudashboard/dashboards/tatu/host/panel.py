@@ -19,7 +19,7 @@ from openstack_dashboard.dashboards.project import dashboard
 
 
 class Host(horizon.Panel):
-    name = _("Hosts")
+    name = _("Host Certificates")
     slug = 'tatu_host'
 
 dashboard.Project.register(Host)
