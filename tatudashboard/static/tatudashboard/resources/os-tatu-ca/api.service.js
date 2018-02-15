@@ -59,7 +59,7 @@
      */
     function list(params) {
       var config = params ? {'params': params} : {};
-      return httpService.get(apiPassthroughUrl + 'noauth/authorities/', config)
+      return httpService.get(apiPassthroughUrl + 'authorities/', config)
         .error(function () {
           toastService.add('error', gettext('Unable to retrieve the CAs.'));
         });
@@ -76,7 +76,7 @@
      * @returns {Object} The result of the API call
      */
     function get(id) {
-      return httpService.get(apiPassthroughUrl + 'noauth/authorities/' + id + '/')
+      return httpService.get(apiPassthroughUrl + 'authorities/' + id + '/')
         .error(function () {
           toastService.add('error', gettext('Unable to retrieve the CA.'));
         });

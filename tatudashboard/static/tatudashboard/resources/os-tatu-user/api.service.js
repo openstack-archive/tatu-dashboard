@@ -57,7 +57,7 @@
      * @returns {Object} The created user object
      */
     function create(data) {
-      return httpService.post(apiPassthroughUrl + 'usergen/noauth/usercerts/', data)
+      return httpService.post(apiPassthroughUrl + 'usergen/usercerts/', data)
         .error(function() {
           toastService.add('error', gettext('Unable to create the certificate.'));
         })
@@ -75,7 +75,7 @@
      */
     function revoke(user) {
       var data = { 'serial': user.serial }
-      var url = apiPassthroughUrl + 'noauth/revokeduserkeys/' + user.auth_id + '/'
+      var url = apiPassthroughUrl + 'revokeduserkeys/' + user.auth_id + '/'
       return httpService.post(url, data)
         .error(function() {
           toastService.add('error', gettext('Unable to revoke the certificate.'));
@@ -97,7 +97,7 @@
      */
     function list(params) {
       var config = params ? {'params': params} : {};
-      return httpService.get(apiPassthroughUrl + 'noauth/usercerts/', config)
+      return httpService.get(apiPassthroughUrl + 'usercerts/', config)
         .error(function () {
           toastService.add('error', gettext('Unable to retrieve the users.'));
         });
@@ -114,7 +114,7 @@
      * @returns {Object} The result of the API call
      */
     function get(id) {
-      return httpService.get(apiPassthroughUrl + 'noauth/usercerts/' + id + '/')
+      return httpService.get(apiPassthroughUrl + 'usercerts/' + id + '/')
         .error(function () {
           toastService.add('error', gettext('Unable to retrieve the user.'));
         });

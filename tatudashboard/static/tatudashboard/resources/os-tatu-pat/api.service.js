@@ -59,7 +59,7 @@
      */
     function list(params) {
       var config = params ? {'params': params} : {};
-      return httpService.get(apiPassthroughUrl + 'noauth/pats/', config)
+      return httpService.get(apiPassthroughUrl + 'pats/', config)
         .error(function () {
           toastService.add('error', gettext('Unable to retrieve the PAT Gateways.'));
         });

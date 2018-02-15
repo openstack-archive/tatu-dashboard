@@ -68,6 +68,15 @@
       .setProperty('user_id', {
         label: gettext('User ID')
       })
+      .setProperty('user_name', {
+        label: gettext('User Name')
+      })
+      .setProperty('created_at', {
+        label: gettext('Created')
+      })
+      .setProperty('expires_at', {
+        label: gettext('Expires')
+      })
       .setProperty('fingerprint', {
         label: gettext('Fingerprint')
       })
@@ -100,6 +109,14 @@
       })
       .append({
         id: 'revoked',
+        priority: 2
+      })
+      .append({
+        id: 'expires_at',
+        priority: 2
+      })
+      .append({
+        id: 'principals',
         priority: 2
       })
       .append({
