@@ -31,6 +31,8 @@
     .module('tatudashboard.resources', [
       'tatudashboard.resources.os-tatu-ca',
       'tatudashboard.resources.os-tatu-user',
-      'tatudashboard.resources.os-tatu-host'
+      'tatudashboard.resources.os-tatu-host',
+      'tatudashboard.resources.os-tatu-host-cert',
+      'tatudashboard.resources.os-tatu-pat'
     ]);
 })();

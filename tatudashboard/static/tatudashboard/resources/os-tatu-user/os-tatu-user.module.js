@@ -116,7 +116,7 @@
     function listUsers() {
       return userApi.list().then(function onList(response) {
         // listFunctions are expected to return data in "items"
-        response.data.items = response.data.users;
+        response.data.items = response.data.certs;
 
         util.addTimestampIds(response.data.items, 'user_id');
 

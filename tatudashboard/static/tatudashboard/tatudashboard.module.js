@@ -66,6 +66,12 @@
       })
       .when('/project/tatu_host/', {
         templateUrl: path + 'host.html'
+      })
+      .when('/project/tatu_host_cert/', {
+        templateUrl: path + 'host_cert.html'
+      })
+      .when('/project/tatu_pat/', {
+        templateUrl: path + 'pat.html'
       });
   }
 

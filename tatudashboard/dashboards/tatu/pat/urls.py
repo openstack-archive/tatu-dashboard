@@ -12,14 +12,10 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import horizon
-from django.utils.translation import ugettext_lazy as _
+from django.conf.urls import url
 
-from openstack_dashboard.dashboards.project import dashboard
+from . import views
 
-
-class Host(horizon.Panel):
-    name = _("Hosts")
-    slug = 'tatu_host'
-
-dashboard.Project.register(Host)
+urlpatterns = [
+    url('', views.IndexView.as_view(), name='index'),
+]

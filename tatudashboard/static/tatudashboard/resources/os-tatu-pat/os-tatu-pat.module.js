@@ -26,77 +26,68 @@
    * to support and display SSH (Tatu) host related content.
    */
   angular
-    .module('tatudashboard.resources.os-tatu-host', [
+    .module('tatudashboard.resources.os-tatu-pat', [
       'ngRoute'
     ])
     .constant(
-      'tatudashboard.resources.os-tatu-host.resourceType', 'OS::Tatu::Host')
+      'tatudashboard.resources.os-tatu-pat.resourceType', 'OS::Tatu::PAT')
     .config(config)
     .run(run);
 
   config.$inject = ['$provide', '$windowProvider'];
 
   function config($provide, $windowProvider) {
-    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-host/';
-    $provide.constant('tatudashboard.resources.os-tatu-host.basePath', path);
+    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-pat/';
+    $provide.constant('tatudashboard.resources.os-tatu-pat.basePath', path);
   }
 
   run.$inject = [
     'horizon.framework.conf.resource-type-registry.service',
-    'tatudashboard.resources.os-tatu-host.api',
-    'tatudashboard.resources.os-tatu-host.resourceType',
-    'tatudashboard.resources.util',
-    '$filter'
+    'tatudashboard.resources.os-tatu-pat.api',
+    'tatudashboard.resources.os-tatu-pat.resourceType',
+    'tatudashboard.resources.util'
   ];
 
   function run(registry,
                api,
                resourceTypeString,
-               util,
-               $filter) {
+               util) {
     var resourceType = registry.getResourceType(resourceTypeString);
     resourceType
-      .setNames(gettext('SSH Host'), gettext('SSH Hosts'))
-      .setListFunction(listHosts)
-      .setProperty('id', {
-        label: gettext('Host ID')
+      .setNames(gettext('SSH PAT Gateway'), gettext('SSH PAT Gateways'))
+      .setListFunction(listPATs)
+      .setProperty('ip', {
+        label: gettext('IP Address')
       })
-      .setProperty('name', {
-        label: gettext('Hostname')
+      .setProperty('chassis', {
+        label: gettext('Assigned Compute Node')
       })
-      .setProperty('pat_bastions', {
-        label: gettext('PAT Bastions')
-      })
-      .setProperty('srv_url', {
-        label: gettext('SRV Recordset URL')
+      .setProperty('lport', {
+        label: gettext('Neutron Port')
       });
 
     resourceType
       .tableColumns
       .append({
-        id: 'id',
+        id: 'ip',
         priority: 1
       })
       .append({
-        id: 'name',
+        id: 'lport',
         priority: 2
       })
       .append({
-        id: 'srv_url',
+        id: 'chassis',
         priority: 2
-      })
-      .append({
-        id: 'pat_bastions',
-        priority: 2,
-        filters: ['noName']
       });
 
-    function listHosts() {
+
+    function listPATs() {
       return api.list().then(function onList(response) {
         // listFunctions are expected to return data in "items"
-        response.data.items = response.data.hosts;
+        response.data.items = response.data.pats;
 
-        util.addTimestampIds(response.data.items, 'host_id');
+        util.addTimestampIds(response.data.items, 'lport');
 
         return response;
       });

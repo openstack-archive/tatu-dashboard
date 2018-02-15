@@ -18,8 +18,8 @@ from django.utils.translation import ugettext_lazy as _
 from openstack_dashboard.dashboards.project import dashboard
 
 
-class Host(horizon.Panel):
-    name = _("Hosts")
-    slug = 'tatu_host'
+class HostCert(horizon.Panel):
+    name = _("Host Certificates")
+    slug = 'tatu_host_cert'
 
-dashboard.Project.register(Host)
+dashboard.Project.register(HostCert)

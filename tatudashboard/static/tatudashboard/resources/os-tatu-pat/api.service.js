@@ -17,8 +17,8 @@
   'use strict';
 
   angular
-    .module('tatudashboard.resources.os-tatu-host')
-    .factory('tatudashboard.resources.os-tatu-host.api', apiService);
+    .module('tatudashboard.resources.os-tatu-pat')
+    .factory('tatudashboard.resources.os-tatu-pat.api', apiService);
 
   apiService.$inject = [
     'tatudashboard.apiPassthroughUrl',
@@ -31,7 +31,7 @@
    * @param {Object} httpService
    * @param {Object} toastService
    * @name apiService
-   * @description Provides direct access to Tatu host APIs.
+   * @description Provides direct access to Tatu pat APIs.
    * @returns {Object} The service
    */
   function apiService(apiPassthroughUrl, httpService, toastService) {
@@ -47,10 +47,10 @@
     /**
      * @name list
      * @description
-     * Get a list of hosts.
+     * Get a list of PAT gateways.
      *
      * The listing result is an object with property "items." Each item is
-     * a host.
+     * a PAT gateway.
      *
      * @param {Object} params
      * Query parameters. Optional.
@@ -59,28 +59,10 @@
      */
     function list(params) {
       var config = params ? {'params': params} : {};
-      return httpService.get(apiPassthroughUrl + 'noauth/hosts/', config)
+      return httpService.get(apiPassthroughUrl + 'noauth/pats/', config)
         .error(function () {
-          toastService.add('error', gettext('Unable to retrieve the hosts.'));
+          toastService.add('error', gettext('Unable to retrieve the PAT Gateways.'));
         });
     }
-
-    /**
-     * @name get
-     * @description
-     * Get a single host by ID.
-     *
-     * @param {string} id
-     * Specifies the id of the host to request.
-     *
-     * @returns {Object} The result of the API call
-     */
-    function get(id) {
-      return httpService.get(apiPassthroughUrl + 'noauth/hosts/' + id + '/')
-        .error(function () {
-          toastService.add('error', gettext('Unable to retrieve the host.'));
-        });
-    }
-
   }
 }());

@@ -19,32 +19,32 @@
 
   /**
    * @ngdoc overview
-   * @ngname tatudashboard.resources.os-tatu-host
+   * @ngname tatudashboard.resources.os-tatu-host-cert
    *
    * @description
    * Provides all of the services and widgets required
-   * to support and display SSH (Tatu) host related content.
+   * to support and display SSH (Tatu) host certificate related content.
    */
   angular
-    .module('tatudashboard.resources.os-tatu-host', [
+    .module('tatudashboard.resources.os-tatu-host-cert', [
       'ngRoute'
     ])
     .constant(
-      'tatudashboard.resources.os-tatu-host.resourceType', 'OS::Tatu::Host')
+      'tatudashboard.resources.os-tatu-host-cert.resourceType', 'OS::Tatu::HostCert')
     .config(config)
     .run(run);
 
   config.$inject = ['$provide', '$windowProvider'];
 
   function config($provide, $windowProvider) {
-    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-host/';
-    $provide.constant('tatudashboard.resources.os-tatu-host.basePath', path);
+    var path = $windowProvider.$get().STATIC_URL + 'tatudashboard/resources/os-tatu-host-cert/';
+    $provide.constant('tatudashboard.resources.os-tatu-host-cert.basePath', path);
   }
 
   run.$inject = [
     'horizon.framework.conf.resource-type-registry.service',
-    'tatudashboard.resources.os-tatu-host.api',
-    'tatudashboard.resources.os-tatu-host.resourceType',
+    'tatudashboard.resources.os-tatu-host-cert.api',
+    'tatudashboard.resources.os-tatu-host-cert.resourceType',
     'tatudashboard.resources.util',
     '$filter'
   ];
@@ -56,45 +56,53 @@
                $filter) {
     var resourceType = registry.getResourceType(resourceTypeString);
     resourceType
-      .setNames(gettext('SSH Host'), gettext('SSH Hosts'))
-      .setListFunction(listHosts)
-      .setProperty('id', {
+      .setNames(gettext('Certificate'), gettext('Certificate'))
+      .setListFunction(listHostCerts)
+      .setProperty('host_id', {
         label: gettext('Host ID')
       })
-      .setProperty('name', {
+      .setProperty('hostname', {
         label: gettext('Hostname')
       })
-      .setProperty('pat_bastions', {
-        label: gettext('PAT Bastions')
+      .setProperty('fingerprint', {
+        label: gettext('Fingerprint')
       })
-      .setProperty('srv_url', {
-        label: gettext('SRV Recordset URL')
+      .setProperty('auth_id', {
+        label: gettext('Project/CA ID')
+      })
+      .setProperty('cert', {
+        label: gettext('Host Certificate')
       });
 
     resourceType
       .tableColumns
       .append({
-        id: 'id',
+        id: 'host_id',
         priority: 1
       })
       .append({
-        id: 'name',
+        id: 'hostname',
         priority: 2
       })
       .append({
-        id: 'srv_url',
+        id: 'fingerprint',
         priority: 2
       })
       .append({
-        id: 'pat_bastions',
+        id: 'auth_id',
+        priority: 2
+      })
+      .append({
+        id: 'cert',
         priority: 2,
-        filters: ['noName']
-      });
+        filters: [function(input){ return $filter('limitTo')(input, 50, 0); }]
+      })
 
-    function listHosts() {
+
+    function listHostCerts() {
       return api.list().then(function onList(response) {
         // listFunctions are expected to return data in "items"
-        response.data.items = response.data.hosts;
+        response.data.items = response.data.certs;
 
         util.addTimestampIds(response.data.items, 'host_id');
 

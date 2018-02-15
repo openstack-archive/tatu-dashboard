@@ -12,14 +12,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import horizon
-from django.utils.translation import ugettext_lazy as _
-
-from openstack_dashboard.dashboards.project import dashboard
+from django.views import generic
 
 
-class Host(horizon.Panel):
-    name = _("Hosts")
-    slug = 'tatu_host'
-
-dashboard.Project.register(Host)
+class IndexView(generic.TemplateView):
+    template_name = 'angular.html'
