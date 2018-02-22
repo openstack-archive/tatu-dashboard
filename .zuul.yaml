@@ -1,4 +1,0 @@
-- project:
-    name: openstack/tatu-dashboard
-    templates:
-      - tatu-devstack-jobs
