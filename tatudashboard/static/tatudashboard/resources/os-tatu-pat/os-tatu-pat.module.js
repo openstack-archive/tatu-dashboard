@@ -87,7 +87,7 @@
         // listFunctions are expected to return data in "items"
         response.data.items = response.data.pats;
 
-        util.addTimestampIds(response.data.items, 'lport');
+        util.addTimestampIds(response.data.items, 'ip');
 
         return response;
       });

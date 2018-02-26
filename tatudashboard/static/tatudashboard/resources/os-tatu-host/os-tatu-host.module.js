@@ -96,7 +96,7 @@
         // listFunctions are expected to return data in "items"
         response.data.items = response.data.hosts;
 
-        util.addTimestampIds(response.data.items, 'host_id');
+        util.addTimestampIds(response.data.items, 'id');
 
         return response;
       });

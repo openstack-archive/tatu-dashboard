@@ -19,7 +19,7 @@ PANEL_DASHBOARD = 'project'
 # If set to True, this dashboard will not be added to the settings.
 DISABLED = False
 
-ADD_PANEL = 'tatudashboard.dashboards.tatu.host.panel.HostCert'
+ADD_PANEL = 'tatudashboard.dashboards.tatu.host_cert.panel.HostCert'
 
 ADD_ANGULAR_MODULES = ['tatudashboard']
 

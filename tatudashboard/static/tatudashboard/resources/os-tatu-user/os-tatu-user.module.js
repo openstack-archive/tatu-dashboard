@@ -96,15 +96,15 @@
     resourceType
       .tableColumns
       .append({
-        id: 'user_id',
+        id: 'serial',
         priority: 1
       })
       .append({
-        id: 'fingerprint',
+        id: 'user_name',
         priority: 2
       })
       .append({
-        id: 'auth_id',
+        id: 'principals',
         priority: 2
       })
       .append({
@@ -114,20 +114,12 @@
       .append({
         id: 'expires_at',
         priority: 2
-      })
-      .append({
-        id: 'principals',
-        priority: 2
-      })
-      .append({
-        id: 'serial',
-        priority: 2
-      })
-      .append({
+      });
+      /*.append({
         id: 'cert',
         priority: 2,
         filters: [function(input){ return $filter('limitTo')(input, 50, 0); }]
-      });
+      });*/
 
 
     function listUsers() {
