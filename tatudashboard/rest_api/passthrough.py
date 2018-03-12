@@ -41,9 +41,10 @@ def _passthrough_request(request_method, url,
         verify = False
 
     service_url = _get_service_url(request, 'ssh')
-    request_url = '{}{}'.format(
+    request_url = '{}{}{}'.format(
         service_url,
-        url if service_url.endswith('/') else ('/' + url)
+        'v1/' if service_url.endswith('/') else '/v1/',
+        url
     )
 
     response = request_method(
